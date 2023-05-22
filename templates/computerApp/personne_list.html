@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <h1>Liste des personnes</h1>
+    <a href="{%url 'add-personne' %}" type="button" class="btn btn-primary">Ajouter une personne</a>
+    <a href="{%url 'delete-personne' %}" type="button" class="btn btn-primary">Supprimer une personne</a>
+    {% if personnes %}
+    <ul>
+        <div class="row mb-2 text-center">
+        <div class="col-2 themed-grid-col">id</div>
+        <div class="col-2 themed-grid-col">Nom</div>
+        <div class="col-2 themed-grid-col">Prénom</div>
+        <div class="col-2 themed-grid-col">Sexe</div>
+        <div class="col-2 themed-grid-col">Secteur d'activité</div>
+        </div>
+        {% for personne in personnes %}
+            <li>
+            <div class="row mb-2 text-center">
+            <div class="col-sm-2 themed-grid-col"><a href="{% url 'personne-detail' personne.id %}"> {{personne.id}} </a></div>
+            <div class="col-sm-2 themed-grid-col">{{ personne.nom }}</div>
+            <div class="col-sm-2 themed-grid-col">{{ personne.prenom }}</div>
+            <div class="col-sm-2 themed-grid-col">{{ personne.sexe }}</div>
+            <div class="col-sm-2 themed-grid-col">{{ personne.secteur }}</div>         
+            </div>
+
+
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>Il n'y a personne.</p>
+    {% endif %}
+    
+{% endblock %}
+

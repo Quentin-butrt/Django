@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <h1>Liste des machines</h1>
+    <a href="{%url 'add-machine' %}" type="button" class="btn btn-primary">Ajouter une machine</a>
+    <a href="{%url 'delete-machine' %}" type="button" class="btn btn-primary">Supprimer une machine</a>
+    {% if machines %}
+    <ul>
+        {% for machine in machines %}
+                <!-- On ajoute image ici depuis les statics -->
+                {% load static %}
+                <img id="PC" src=" {% static 'computerApp/images/image_PC.jpg' %}"  alt="images" style="width:125px; height:120px;">
+                <a href="{% url 'machine-detail' machine.id %}"> {{machine.nom}} </a>
+                {% if machine.etat == True %}
+                    <p><span class="online"></span> En ligne </p>
+                {% else %}
+                    <p><span class="offline"></span> Hors ligne </p>
+                {% endif %}
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>Il n'y a pas de machine.</p>
+    {% endif %}
+{% endblock %}

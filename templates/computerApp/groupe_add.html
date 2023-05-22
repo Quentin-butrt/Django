@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>Ajouter un groupe</h1>
+<form method="post">
+{% csrf_token %}
+<p>Nom du groupe :</p>
+{{ form.nom }}
+<p>Nom du Responsable :</p>
+{{ form.responsable}}
+</br>
+<input type="submit" value="Submit">
+</form>
+{% endblock %}

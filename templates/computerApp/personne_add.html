@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1> Ajouter une personne</h1>
+<form method="post">
+{% csrf_token %}
+<p>Nom :</p>
+{{ form.nom }}
+<p>Prénom :</p>
+{{ form.prenom }}
+<p>Sexe :</p>
+{{ form.sexe }}
+<p>Secteur d'activité :</p>
+{{ form.secteur }}
+</br>
+<input type="submit" value="Submit">
+</form>
+{% endblock %}

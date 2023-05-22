@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <h1>Nom: {{ machine.nom }}</h1>
+    <p><a><strong>id</strong> : {{ machine.id }}</a></p>
+    <p><strong>Date de maintenance :</strong> {{ machine.maintenanceDate }}</p>
+    <p><strong>Machine :</strong> {{ machine.mach }}</p>
+    <p><strong>Etat :</strong> 
+        {% if machine.etat == True %}
+                    <p><span class="online"></span> En ligne </p>
+                {% else %}
+                    <p><span class="offline"></span> Hors ligne </p>
+                {% endif %}
+    </p>
+
+{% endblock %}
