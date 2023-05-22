@@ -1,0 +1,28 @@
+body {
+    text-align: center !important;
+}
+
+header {
+    display: inline-block;
+}
+
+#link {
+    color: black;
+  }
+
+
+.online {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.offline {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+}
