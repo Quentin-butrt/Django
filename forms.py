@@ -1,3 +1,4 @@
+import re
 from typing import Any, Dict #queryset
 from django import forms
 from django.core.exceptions import ValidationError
@@ -15,7 +16,8 @@ class AddMachineForm(forms.Form) :
     
     nom = forms.CharField(required=True, label='Nom de la machine')
     mach = forms.ChoiceField(choices=TYPE, required=False)
-    etat = forms.BooleanField(required=True, label='Etat de la machine')
+    etat = forms.BooleanField(required=False, label='Etat de la machine')
+    ip = forms.GenericIPAddressField(label="Adresse IP")
 
     # On ajoute une fonction de validation
     def clean_nom(self):
@@ -24,18 +26,24 @@ class AddMachineForm(forms.Form) :
             raise ValidationError(("Erreur de format pour le champ nom"))
         return data
     
+    def cleaned_ip(self):
+        data = self.cleaned_data["ip"]
+        address = "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$"
+        if not (re.search(address, data)):
+            raise ValidationError(("Erreure de format pour le champ Adresse IP"))
+        return data
     
 
 class AddPersonneForm(forms.Form) :
 
     TYPE = (
-    ('M', ('Employer Masculin')),
-    ('F', ('employer Féminin')),
-    ('ND', ('Non défini')),
+    ('Employer Masculin', ('Employer Masculin')),
+    ('Employer Féminin', ('Employer Féminin')),
+    ('Non Défini', ('Non Défini')),
     )
 
     TYPE2 = (
-    ('ND', ('Non défini')),
+    ('Non défini', ('Non défini')),
     ('DG', ('Direction Générale')),
     ('RH', ('Ressource Humaine')),
     ('DST', ('Direction des services techniques')),
@@ -47,7 +55,7 @@ class AddPersonneForm(forms.Form) :
     nom = forms.CharField(required=True, label="Nom de l'employer")
     prenom = forms.CharField(required=True, label="Prénom de l'employer")
     secteur = forms.ChoiceField(choices=TYPE2, required=False)
-    #email = forms.CharField(max_length=64, required=False)
+    email = forms.EmailField(max_length=70, label="email de l'employer")
     sexe = forms.ChoiceField(choices=TYPE, required=False)
 
     # On ajoute une fonction de validation
@@ -63,28 +71,11 @@ class AddPersonneForm(forms.Form) :
             raise ValidationError(("Erreur de format pour le champ prénom"))
         return data
     
-
-
-class DeleteMachineForm(forms.Form) :
-    
-    machine_id = forms.ModelChoiceField(queryset=Machine.objects.all())
-
-    # On ajoute une fonction de validation
-    def delete_machine(self):
-        machine = self.cleaned_data.get('machine_id')
-        if machine:
-            machine.delete()
-
-class DeletePersonneForm(forms.Form) :
-    
-    personne_id = forms.ModelChoiceField(queryset=Personne.objects.all())
-
-    # On ajoute une fonction de validation
-    def delete_personne(self):
-        personne = self.cleaned_data.get('personne_id')
-        if personne:
-            personne.delete()
-
+    def clean_email(self):
+        data = self.cleaned_data["email"]
+        if len(data) > 70:
+            raise ValidationError(("Erreur de format pour le champ email"))
+        return data
 
 class AddGroupeForm(forms.Form) :
     
@@ -102,14 +93,36 @@ class AddGroupeForm(forms.Form) :
         if len(data) > 50:
             raise ValidationError(("Erreur de format pour le champ responsable"))
         return data
+
+
+class DeleteMachineForm(forms.Form) :
+    
+    nom_de_la_machine = forms.ModelChoiceField(queryset=Machine.objects.all())
+
+    # On ajoute une fonction de validation
+    def delete_machine(self):
+        machine = self.cleaned_data.get('nom_de_la_machine')
+        if machine:
+            machine.delete()
+
+class DeletePersonneForm(forms.Form) :
+    
+    nom_de_la_personne = forms.ModelChoiceField(queryset=Personne.objects.all())
+
+    # On ajoute une fonction de validation
+    def delete_personne(self):
+        personne = self.cleaned_data.get('nom_de_la_personne')
+        if personne:
+            personne.delete()
+
     
 
 class DeleteGroupeForm(forms.Form) :
     
-    groupe_id = forms.ModelChoiceField(queryset=Groupe.objects.all())
+    nom_du_groupe = forms.ModelChoiceField(queryset=Groupe.objects.all())
 
     # On ajoute une fonction de validation
     def delete_groupe(self):
-        groupe = self.cleaned_data.get('groupe_id')
+        groupe = self.cleaned_data.get('nom_du_groupe')
         if groupe :
             groupe.delete()

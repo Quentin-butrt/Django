@@ -40,7 +40,8 @@ def machine_add_form(request):
         if form.is_valid():
             new_machine = Machine(nom=form.cleaned_data['nom'],
                                     mach=form.cleaned_data['mach'],
-                                    etat=form.cleaned_data['etat'])
+                                    etat=form.cleaned_data['etat'],
+                                    ip=form.cleaned_data['ip'])
             new_machine.save()
             return redirect('machines')
     
@@ -79,6 +80,7 @@ def personne_add_form(request):
         if form.is_valid():
             new_personne = Personne(nom=form.cleaned_data['nom'],
                                     prenom=form.cleaned_data['prenom'],
+                                    email=form.cleaned_data['email'],
                                     sexe=form.cleaned_data['sexe'],
                                     secteur=form.cleaned_data['secteur'],
                                     )
@@ -143,4 +145,15 @@ def groupe_delete_form(request):
         context = {'form' : form}
         return render(request, 'computerApp/groupe_delete.html' ,context)
 
+
+def changement_etat_view(request, machine_id):
+    # Récupérer la machine correspondant à l'ID
+    machine = get_object_or_404(Machine, id=machine_id)
+
+    # Inverser le statut de la machine
+    machine.etat = not machine.etat
+    machine.save()
+
+    # Rediriger vers la page de détail de la machine
+    return redirect('machine_detail', pk=machine_id)
 

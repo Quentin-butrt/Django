@@ -1,5 +1,8 @@
+from xml.etree.ElementInclude import include
 from django.urls import path
 from . import views
+
+
 
 
 urlpatterns = [ 
@@ -16,6 +19,9 @@ urlpatterns = [
     path('groupe/<pk>', views.groupe_detail_view ,name='groupe-detail'),
     path('add-groupe' , views.groupe_add_form , name='add-groupe'),
     path('delete-groupe' , views.groupe_delete_form , name='delete-groupe'),
+    path('changement_etat/<int:machine_id>/', views.changement_etat_view, name='changement_etat'),
+    path('machine_detail/<int:pk>/', views.machine_detail_view, name='machine_detail'),
+
 ]
 
 
