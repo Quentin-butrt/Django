@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Liste des groupes</h1>
     <a href="{%url 'add-groupe' %}" type="button" class="btn btn-primary">Ajouter un groupe</a>
-    <a href="{%url 'delete-groupe' %}" type="button" class="btn btn-primary">Supprimer un groupe</a>
+    <a href="{%url 'delete-groupe' %}" type="button" class="btn btn-danger">Supprimer un groupe</a>
     {% if groupes %}
     <ul>
         {% for groupe in groupes %}
@@ -11,6 +11,8 @@
             </br>
         {% endfor %}
     </ul>
+    
+        
     {% else %}
         <p>Il n'y a pas de groupe.</p>
     {% endif %}

@@ -1,7 +1,17 @@
 {% extends "index.html" %}
 
 {% block content %}
+<a href="{%url 'groupes' %}" type="button" class="btn btn-success">Retour à la liste des groupess</a>
     <h1>Nom: {{ groupe.nom }}</h1>
     <p>Responsable : {{ groupe.responsable }} </p>
+    <p>{{ personne.nom }}</p>
+    {% if personnes %}
+    <ul>
+        {% for personne in personnes %}
+            <a href="{% url 'personne-detail' personne.id %}"> {{personne.nom}} </a>
+            </br>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
 {% endblock %}

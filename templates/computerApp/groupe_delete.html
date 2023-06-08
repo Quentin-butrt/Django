@@ -1,11 +1,12 @@
 {% extends "index.html" %}
 
 {% block content %}
+<a href="{%url 'groupes' %}" type="button" class="btn btn-primary">Retour à la liste des groupess</a>
 <h1>Supprimmer un groupe</h1>
 <form method="post">
 {% csrf_token %}
 {{ form.as_p }}
-<input type="submit" value="Delete">
+<input type="submit" value="Supprimer">
 </form>
 {% endblock %}
 

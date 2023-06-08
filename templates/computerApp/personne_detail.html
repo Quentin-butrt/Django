@@ -1,12 +1,15 @@
 {% extends "index.html" %}
 
 {% block content %}
+<a href="{%url 'personnes' %}" type="button" class="btn btn-success">Retour à la liste des personnes</a>
     <h1><strong>id</strong> : {{ personne.id }}</h1>
 
     <p><a>Nom: {{ personne.nom }}</a></p>
     <p>Prénom : {{personne.prenom }}</p>
+    <p>Addresse mail : {{ personne.email }}</p>
     <p>Sexe : {{ personne.sexe }}</p>
     <p>Secteur d'activité : {{ personne.secteur }}</p>
+    
 
 {% endblock %}
 

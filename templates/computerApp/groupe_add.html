@@ -1,14 +1,12 @@
 {% extends "index.html" %}
 
 {% block content %}
+<a href="{%url 'groupes' %}" type="button" class="btn btn-primary">Retour à la liste des groupes</a>
 <h1>Ajouter un groupe</h1>
 <form method="post">
 {% csrf_token %}
-<p>Nom du groupe :</p>
-{{ form.nom }}
-<p>Nom du Responsable :</p>
-{{ form.responsable}}
+{{ form.as_p}}
 </br>
-<input type="submit" value="Submit">
+<input type="submit" class="btn btn-secondary" value="Ajouter">
 </form>
 {% endblock %}

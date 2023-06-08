@@ -1,16 +1,12 @@
 {% extends "index.html" %}
 
 {% block content %}
+<a href="{%url 'machines' %}" type="button" class="btn btn-primary">Retour à la liste des machines</a>
 <h1>Ajouter une machine</h1>
 <form method="post">
 {% csrf_token %}
-<p>Nom de la machine : </p>
-{{ form.nom }}
-<p>Type de machine :</p>
-{{ form.mach }}
-<p>Etat</p>
-{{ form.etat }}
+{{ form.as_p }}
 </br>
-<input type="submit" value="Submit">
+<input type="submit" class="btn btn-secondary" value="Ajouter">
 </form>
 {% endblock %}

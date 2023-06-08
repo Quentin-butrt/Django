@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Liste des machines</h1>
     <a href="{%url 'add-machine' %}" type="button" class="btn btn-primary">Ajouter une machine</a>
-    <a href="{%url 'delete-machine' %}" type="button" class="btn btn-primary">Supprimer une machine</a>
+    <a href="{%url 'delete-machine' %}" type="button" class="btn btn-danger">Supprimer une machine</a>
     {% if machines %}
     <ul>
         {% for machine in machines %}

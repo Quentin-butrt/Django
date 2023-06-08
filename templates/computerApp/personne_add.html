@@ -1,18 +1,12 @@
 {% extends "index.html" %}
 
 {% block content %}
+<a href="{%url 'personnes' %}" type="button" class="btn btn-primary">Retour à la liste des personnes</a>
 <h1> Ajouter une personne</h1>
 <form method="post">
 {% csrf_token %}
-<p>Nom :</p>
-{{ form.nom }}
-<p>Prénom :</p>
-{{ form.prenom }}
-<p>Sexe :</p>
-{{ form.sexe }}
-<p>Secteur d'activité :</p>
-{{ form.secteur }}
+{{ form.as_p }}
 </br>
-<input type="submit" value="Submit">
+<input type="submit" class="btn btn-secondary" value="Ajouter">
 </form>
 {% endblock %}
