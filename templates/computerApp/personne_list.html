@@ -4,8 +4,8 @@
     <h1>Liste des personnes</h1>
     <a style="display: inline;" href="{%url 'add-personne' %}" type="button" class="btn btn-primary">Ajouter une personne</a>
     <a style="display: inline;" href="{%url 'delete-personne' %}" type="button" class="btn btn-danger">Supprimer une personne</a>
-
-    <p style="display: inline;">Nombre de personnes : {{ personnes.count }}</p>
+    </br>
+    <p>Nombre de personnes : {{ personnes.count }}</p>
 
     {% if personnes %}
     <ul>
