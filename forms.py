@@ -28,6 +28,7 @@ class AddMachineForm(forms.Form) :
     
     def cleaned_ip(self):
         data = self.cleaned_data["ip"]
+        #Représente les valeurs possibles pour chaque partie de l'adresse IP (de 0 à 255)
         address = "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$"
         if not (re.search(address, data)):
             raise ValidationError(("Erreure de format pour le champ Adresse IP"))
